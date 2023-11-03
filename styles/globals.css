@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: rgb(245, 247, 247);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  overflow: hidden scroll;
+  text-rendering: optimizelegibility;
+  font-size: 17px !important;
+}
+
+.wrapper {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px 0px;
+  height: 100%;
+  padding: 30px;
+  margin: 0px 50px;
+}
