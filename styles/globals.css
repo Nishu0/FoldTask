@@ -35,10 +35,19 @@ ul {
 .skillsList {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0px;
 }
 
 .skillsListItem {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px;
   background-color: rgb(179, 205, 197);
   border-radius: 3px;
   border: 1px solid rgba(11, 99, 83, 0.2);
@@ -75,6 +84,23 @@ ul {
   height: 24px;
   width: 24px;
   outline: none;
+}
+
+.skillsListContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  /* margin: 10px 0px; */
+}
+
+.skillsListColumn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 5px;
+
 }
 
 
