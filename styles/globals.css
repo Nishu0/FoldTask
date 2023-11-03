@@ -21,3 +21,60 @@ body {
   padding: 30px;
   margin: 0px 50px;
 }
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.skillsList {
+  list-style: none;
+  padding: 0;
+}
+
+.skillsListItem {
+  display: flex;
+  background-color: rgb(179, 205, 197);
+  border-radius: 3px;
+  border: 1px solid rgba(11, 99, 83, 0.2);
+  margin-bottom: 16px;
+  color: rgb(146, 172, 160);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1em;
+  user-select: none;
+}
+
+.skillsListItem > div {
+  display: flex;
+  height: 54px;
+  padding: 0px 16px;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.span {
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.skillsListItem button {
+  background: transparent;
+  border: none;
+  padding: 0px;
+  height: 24px;
+  width: 24px;
+  outline: none;
+}
+
+

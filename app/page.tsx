@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import SkillsList from '@/components/SkillsList'
 
 export default function Home() {
   return (
@@ -9,8 +10,11 @@ export default function Home() {
     <div className='wrapper'>
       
       <p>The skills you mentioned here will help the hackathon organizers in assessing you as potential participant</p>
+      <SkillsList />
+      
 
     </div>
+    
     </>
     
   )
