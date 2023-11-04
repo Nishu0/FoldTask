@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AutoCompleteInput, {Option} from './AutoCompleteInput';
 
 interface Skill {
@@ -15,15 +15,35 @@ const SkillsList = () => {
   const [skills, setSkills] = useState<Skill[]>(Array.from({length: 10}, (_, i) => ({id: i + 1, name: ''})));
 
   const [editing, setEditing] = useState<Record<number, boolean>>({});
+  const [firstEmptySlot, setFirstEmptySlot] = useState<number>(1);
+  const addSkillInputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = (id: number) => {
-    setEditing({...editing, [id]: true});
+    if (id === firstEmptySlot) {
+      setEditing({...editing, [id]: true});
+      if (addSkillInputRef.current) {
+        addSkillInputRef.current.focus();
+      }
+    }
   };
 
   const handleChange = (option: Option, id: number) => {
-    setSkills(skills.map(skill => skill.id === id ? {...skill, name: option.value} : skill));
-    setEditing({...editing, [id]: false});
-    setShowButtons({...showButtons, [id]: option.value !== ''});
+    if (id === firstEmptySlot) {
+      setSkills(
+        skills.map((skill) =>
+          skill.id === id ? { ...skill, name: option.value } : skill
+        )
+      );
+      setEditing({...editing, [id]: false});
+      setShowButtons({...showButtons, [id]: option.value !== ''});
+      if (option.value !== '') {
+        //Finding next empty slot for highlighting and editing :))) 
+        const nextEmptySlot = skills.find((skill) => skill.id > id && skill.name === '');
+        if (nextEmptySlot) {
+          setFirstEmptySlot(nextEmptySlot.id);
+        }
+      }
+    }
   };
 
 const handleDragStart = (e: React.DragEvent<HTMLLIElement>, id: number) => {
@@ -69,7 +89,8 @@ return (
         {skills.slice(0, 5).map((skill, index) => (
             <li
                 key={skill.id}
-                className="skillsListItem"
+                className={`skillsListItem ${skill.id === firstEmptySlot ? 'highlight' : ''}`}
+                tabIndex={0} 
                 onDragOver={(e)=>handleDragOver(e,skill.id)}
                 onDrop={(e) => handleDrop(e, index)}
                 draggable={true}
@@ -82,7 +103,7 @@ return (
                   onChange={(option) => handleChange(option, skill.id)} 
                 />
               ) : (
-                <span className='span' onClick={() => handleClick(skill.id)}>
+                <span className='span' onClick={() => handleClick(skill.id)} tabIndex={skill.name ? -1 : 0}>
                   {skill.id}. {skill.name  || 'Add Skill'}
                 </span>
               )}
@@ -103,7 +124,8 @@ return (
           {skills.slice(5).map((skill, index) => (
               <li
                   key={skill.id}
-                  className="skillsListItem"
+                  className={`skillsListItem ${skill.id === firstEmptySlot ? 'highlight' : ''}`}
+                  tabIndex={0}
                   onDragOver={(e)=>handleDragOver(e,skill.id)}
                   onDrop={(e) => handleDrop(e, index + 5)}
                   draggable={true}
@@ -116,7 +138,7 @@ return (
                   onChange={(option) => handleChange(option, skill.id)} 
                 />
               ) : (
-                  <span className='span' onClick={() => handleClick(skill.id)}>
+                  <span className='span' onClick={() => handleClick(skill.id)} tabIndex={skill.name ? -1 : 0}>
                     {skill.id}. {skill.name || 'Add Skill'}
                   </span>
               )}
