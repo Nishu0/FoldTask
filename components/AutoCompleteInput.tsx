@@ -3,7 +3,7 @@ import Select from 'react-select';
 import axios from 'axios';
 
 // Define an interface for the option object
-interface Option {
+export interface Option {
   value: string;
   label: string;
 }

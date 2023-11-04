@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import AutoCompleteInput from './AutoCompleteInput';
+import AutoCompleteInput, {Option} from './AutoCompleteInput';
 
 interface Skill {
   id: number;
