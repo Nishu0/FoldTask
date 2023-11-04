@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
-// Define an interface for the option object
 export interface Option {
   value: string;
   label: string;
 }
 
 interface AutoCompleteInputProps {
-  id: number; // The skill id
+  id: number; 
   onChange: (option: Option, id: number) => void; 
 }
 
@@ -61,7 +60,7 @@ const AutoCompleteInput = ({ id, onChange }: AutoCompleteInputProps) => {
             options={options} 
             onInputChange={handleInputChange} 
             onChange={(option: Option | null) => option && onChange(option, id)} 
-            placeholder="Type to search..."
+            placeholder="Type to search"
             noOptionsMessage={() => 'No tags found'} 
             isLoading={inputValue ? !options.length : undefined} 
           />
