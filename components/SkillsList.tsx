@@ -1,20 +1,27 @@
 "use client";
 import React, { useState } from 'react';
+import AutoCompleteInput from './AutoCompleteInput';
+
+interface Skill {
+  id: number;
+  name: string;
+}
 
 
 const SkillsList = () => {
-  const [skills, setSkills] = useState([
-    { id: 1, name: 'Node.js' },
-    { id: 2, name: 'React' },
-    { id: 3, name: 'JavaScript' },
-    { id: 4, name: 'HTML' },
-    { id: 5, name: 'CSS' },
-    {id: 6, name: 'Python' },
-    {id: 7, name: 'C++' },
-    {id: 8, name: 'C' },
-    {id: 9, name: 'Java' },
-    {id: 10, name: 'C#' },
-  ]);
+
+  const [skills, setSkills] = useState<Skill[]>(Array.from({length: 10}, (_, i) => ({id: i + 1, name: ''})));
+
+  const [editing, setEditing] = useState<Record<number, boolean>>({});
+
+  const handleClick = (id: number) => {
+    setEditing({...editing, [id]: true});
+  };
+
+  const handleChange = (option: Option, id: number) => {
+    setSkills(skills.map(skill => skill.id === id ? {...skill, name: option.value} : skill));
+    setEditing({...editing, [id]: false});
+  };
 
 const handleDragStart = (e: React.DragEvent<HTMLLIElement>, id: number) => {
   e.dataTransfer.setData('text/plain', id.toString());
@@ -50,9 +57,16 @@ return (
                 onDragStart={(e) => handleDragStart(e, skill.id)}
             >
               <div>
-                <span className='span'>
-                  {skill.id}. {skill.name}
+              {editing[skill.id] ? (
+                <AutoCompleteInput
+                  id={skill.id} 
+                  onChange={(option) => handleChange(option, skill.id)} 
+                />
+              ) : (
+                <span className='span' onClick={() => handleClick(skill.id)}>
+                  {skill.id}. {skill.name  || 'Add Skill'}
                 </span>
+              )}
                 <button type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#000" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -75,9 +89,16 @@ return (
                   onDragStart={(e) => handleDragStart(e, skill.id)}
               >
                 <div>
-                  <span className='span'>
-                    {skill.id}. {skill.name}
+                {editing[skill.id] ? (
+                <AutoCompleteInput
+                  id={skill.id} 
+                  onChange={(option) => handleChange(option, skill.id)} 
+                />
+              ) : (
+                  <span className='span' onClick={() => handleClick(skill.id)}>
+                    {skill.id}. {skill.name || 'Add Skill'}
                   </span>
+              )}
                   <button type="button">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#000" className="w-6 h-6">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
