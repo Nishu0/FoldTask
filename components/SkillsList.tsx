@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import AutoCompleteInput, {Option} from './AutoCompleteInput';
+import axios from 'axios';
+
 
 interface Skill {
   id: number;
@@ -18,6 +20,16 @@ const SkillsList = () => {
   const [firstEmptySlot, setFirstEmptySlot] = useState<number>(1);
   const addSkillInputRef = useRef<HTMLInputElement>(null);
 
+  const saveSkillsToApi = (updatedSkills: Skill[]) => {
+    axios.post('/api/skills', { skills: updatedSkills }) // Call the API route
+      .then((response) => {
+        console.log('Skills saved successfully.');
+      })
+      .catch((error) => {
+        console.error('Failed to save skills:', error);
+      });
+  };
+
   const handleClick = (id: number) => {
     if (id === firstEmptySlot) {
       setEditing({...editing, [id]: true});
@@ -29,11 +41,11 @@ const SkillsList = () => {
 
   const handleChange = (option: Option, id: number) => {
     if (id === firstEmptySlot) {
-      setSkills(
-        skills.map((skill) =>
-          skill.id === id ? { ...skill, name: option.value } : skill
-        )
-      );
+      const updatedSkills= skills.map((skill) =>
+      skill.id === id ? { ...skill, name: option.value } : skill
+      )
+      setSkills(updatedSkills);
+      saveSkillsToApi(updatedSkills);
       setEditing({...editing, [id]: false});
       setShowButtons({...showButtons, [id]: option.value !== ''});
       if (option.value !== '') {
@@ -43,6 +55,7 @@ const SkillsList = () => {
           setFirstEmptySlot(nextEmptySlot.id);
         }
       }
+      localStorage.setItem('skills', JSON.stringify(updatedSkills));
     }
   };
 
@@ -58,6 +71,7 @@ const handleDrop = (e: React.DragEvent<HTMLLIElement>, index: number) => {
   if (skill) {
     newSkills.splice(newSkills.indexOf(skill), 1);
     newSkills.splice(index, 0, skill);
+    newSkills.forEach((s, idx) => (s.id = idx + 1));
     setSkills(newSkills);
   }
 };
@@ -73,13 +87,14 @@ const handleDragOver = (e: React.DragEvent<HTMLLIElement>, id:number) => {
 };
 
 useEffect(() => {
-  setSkills(
-    skills.map((skill, index) => ({
-      ...skill,
-      id: index + 1,
-    }))
-  );
-}, [skills]);
+  const savedSkills: Skill[] = JSON.parse(localStorage.getItem('skills') || '[]');
+  setSkills(savedSkills);
+  const emptySkill = savedSkills.find((skill) => skill.name === '');
+  if (emptySkill) {
+    setFirstEmptySlot(emptySkill.id);
+  }
+}, []);
+
 
 return (
   <form>
@@ -107,7 +122,7 @@ return (
                   {skill.id}. {skill.name  || 'Add Skill'}
                 </span>
               )}
-              {showButtons[skill.id] && (
+              {showButtons[skill.id] &&  (
                 <button type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#000" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
