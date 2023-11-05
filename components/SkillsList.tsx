@@ -94,8 +94,6 @@ const handleRemoveSkill = (id: number) => {
   const updatedSkills = skills.map((skill) =>
     skill.id === id ? { ...skill, name: '' } : skill
   );
-  localStorage.setItem('skills', JSON.stringify(updatedSkills));
- 
   const nonEmptySkills = updatedSkills.filter((skill) => skill.name);
   const emptySkills = updatedSkills.filter((skill) => !skill.name);
   const sortedSkills = nonEmptySkills.map((skill, index) => ({
@@ -106,13 +104,16 @@ const handleRemoveSkill = (id: number) => {
     sortedSkills.push({ id: sortedSkills.length + 1, name: skill.name });
   });
   setSkills(sortedSkills);
-  
-  
+  localStorage.setItem('skills', JSON.stringify(sortedSkills));
+  const updatedShowButtons: { [key: number]: boolean } = {};
+    sortedSkills.forEach((skill) => {
+      updatedShowButtons[skill.id] = skill.name !== '';
+    });
+    setShowButtons(updatedShowButtons);
   const firstEmpty = sortedSkills.find((skill) => !skill.name);
   if (firstEmpty) {
     setFirstEmptySlot(firstEmpty.id);
   }
-  setShowButtons({ ...showButtons, [id]: false });
 };
 
 useEffect(() => {
