@@ -9,6 +9,10 @@ interface Skill {
   name: string;
 }
 
+interface ShowButtons {
+  [key: number]: boolean;
+}
+
 
 const SkillsList = () => {
 
@@ -87,8 +91,19 @@ const handleDragOver = (e: React.DragEvent<HTMLLIElement>, id:number) => {
 };
 
 useEffect(() => {
-  const savedSkills: Skill[] = JSON.parse(localStorage.getItem('skills') || '[]');
+  let savedSkills: Skill[] = JSON.parse(localStorage.getItem('skills') || '[]');
   setSkills(savedSkills);
+  if (savedSkills.length === 0) {
+    savedSkills = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, name: '' }));
+    localStorage.setItem('skills', JSON.stringify(savedSkills));
+  }
+  
+  const updatedShowButtons: { [key: number]: boolean } = savedSkills.reduce((acc, skill) => {
+    if (skill.name) {
+      acc[skill.id] = true;
+    }
+    return acc;
+  }, {} as { [key: number]: boolean });
   const emptySkill = savedSkills.find((skill) => skill.name === '');
   if (emptySkill) {
     setFirstEmptySlot(emptySkill.id);
