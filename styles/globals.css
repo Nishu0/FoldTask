@@ -107,4 +107,14 @@ ul {
   background-color: #f7f7f7; 
 }
 
+.nonEmpty{
+  display: flex;
+  background-color: rgb(101, 151, 136);
+  color: rgb(12, 3, 3);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  user-select: none;
+}
+
 

@@ -16,7 +16,7 @@ interface ShowButtons {
 
 const SkillsList = () => {
 
-  const [showButtons, setShowButtons] = useState<Record<number, boolean>>({}); 
+  const [showButtons, setShowButtons] = useState<ShowButtons>({}); 
 
   const [skills, setSkills] = useState<Skill[]>(Array.from({length: 10}, (_, i) => ({id: i + 1, name: ''})));
 
@@ -90,6 +90,31 @@ const handleDragOver = (e: React.DragEvent<HTMLLIElement>, id:number) => {
     }
 };
 
+const handleRemoveSkill = (id: number) => {
+  const updatedSkills = skills.map((skill) =>
+    skill.id === id ? { ...skill, name: '' } : skill
+  );
+  localStorage.setItem('skills', JSON.stringify(updatedSkills));
+ 
+  const nonEmptySkills = updatedSkills.filter((skill) => skill.name);
+  const emptySkills = updatedSkills.filter((skill) => !skill.name);
+  const sortedSkills = nonEmptySkills.map((skill, index) => ({
+    id: index + 1,
+    name: skill.name,
+  }));
+  emptySkills.forEach((skill) => {
+    sortedSkills.push({ id: sortedSkills.length + 1, name: skill.name });
+  });
+  setSkills(sortedSkills);
+  
+  
+  const firstEmpty = sortedSkills.find((skill) => !skill.name);
+  if (firstEmpty) {
+    setFirstEmptySlot(firstEmpty.id);
+  }
+  setShowButtons({ ...showButtons, [id]: false });
+};
+
 useEffect(() => {
   let savedSkills: Skill[] = JSON.parse(localStorage.getItem('skills') || '[]');
   setSkills(savedSkills);
@@ -97,7 +122,6 @@ useEffect(() => {
     savedSkills = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, name: '' }));
     localStorage.setItem('skills', JSON.stringify(savedSkills));
   }
-  
   const updatedShowButtons: { [key: number]: boolean } = savedSkills.reduce((acc, skill) => {
     if (skill.name) {
       acc[skill.id] = true;
@@ -108,6 +132,7 @@ useEffect(() => {
   if (emptySkill) {
     setFirstEmptySlot(emptySkill.id);
   }
+  setShowButtons(updatedShowButtons);
 }, []);
 
 
@@ -119,14 +144,14 @@ return (
         {skills.slice(0, 5).map((skill, index) => (
             <li
                 key={skill.id}
-                className={`skillsListItem ${skill.id === firstEmptySlot ? 'highlight' : ''}`}
+                className={`skillsListItem ${skill.id === firstEmptySlot ? 'highlight' : ''} ${skill.name ? 'nonEmpty' : ''}`}
                 tabIndex={0} 
                 onDragOver={(e)=>handleDragOver(e,skill.id)}
                 onDrop={(e) => handleDrop(e, index)}
                 draggable={true}
                 onDragStart={(e) => handleDragStart(e, skill.id)}
             >
-              <div>
+              <div className={`div ${skill.name ? 'selectedSkill' : ''}`}>
               {editing[skill.id] ? (
                 <AutoCompleteInput
                   id={skill.id} 
@@ -138,7 +163,7 @@ return (
                 </span>
               )}
               {showButtons[skill.id] &&  (
-                <button type="button">
+                <button type="button" onClick={() => handleRemoveSkill(skill.id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#000" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -173,7 +198,7 @@ return (
                   </span>
               )}
                 {showButtons[skill.id] && (
-                  <button type="button">
+                  <button type="button" onClick={() => handleRemoveSkill(skill.id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#000" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>

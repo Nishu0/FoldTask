@@ -18,7 +18,7 @@ const AutoCompleteInput = ({ id, onChange }: AutoCompleteInputProps) => {
 
   const fetchTags = async (query: string) => {
     try {
-      const response = await axios.get(`https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&inname=${query}&site=stackoverflow`);
+      const response = await axios.get(`https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&inname=${query.toLowerCase()}&site=stackoverflow`);
       const data = response.data;
       const tags = data.items.map((item: any) => ({
         value: item.name,
