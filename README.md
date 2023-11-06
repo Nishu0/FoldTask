@@ -1,6 +1,7 @@
 # Task Documentation
 
-![Fold_Money](https://github.com/Nishu0/FoldTask/assets/89217455/9c160046-2bde-4275-98c2-c2cb841ea9ce)
+![Fold_Money](https://github.com/Nishu0/FoldTask/assets/89217455/980015db-ea43-4211-ae9c-df1d14eaf7fa)
+
 
 # Summary
 
@@ -28,8 +29,7 @@
 
 ## Flow of Task
 
-![Fold_Task](https://github.com/Nishu0/FoldTask/assets/89217455/aada3af0-83de-4d1d-9e8e-010e26d435dd)
-
+![Fold_Task](https://github.com/Nishu0/FoldTask/assets/89217455/53c24ae4-dfe0-4679-bb0b-bf366a41e426)
 
 ## Features
 
