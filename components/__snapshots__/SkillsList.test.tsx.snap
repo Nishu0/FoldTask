@@ -1,0 +1,236 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SkillsList snapshot 1`] = `
+<form>
+  <section
+    className="skillsListContainer"
+  >
+    <div
+      className="skillsListColumn"
+    >
+      <ul
+        className="skillsList"
+      >
+        <li
+          className="skillsListItem highlight "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div
+            className="div "
+          >
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              1
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem  "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div
+            className="div "
+          >
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              2
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem  "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div
+            className="div "
+          >
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              3
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem  "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div
+            className="div "
+          >
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              4
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem  "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div
+            className="div "
+          >
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              5
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="skillsListColumn"
+    >
+      <ul
+        className="skillsList"
+      >
+        <li
+          className="skillsListItem "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div>
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              6
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div>
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              7
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div>
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              8
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div>
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              9
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+        <li
+          className="skillsListItem "
+          draggable={true}
+          onDragOver={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          tabIndex={0}
+        >
+          <div>
+            <span
+              className="span"
+              onClick={[Function]}
+              tabIndex={0}
+            >
+              10
+              . 
+              Add Skill
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</form>
+`;

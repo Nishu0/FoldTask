@@ -159,9 +159,11 @@ return (
                   onChange={(option) => handleChange(option, skill.id)} 
                 />
               ) : (
-                <span className='span' onClick={() => handleClick(skill.id)} tabIndex={skill.name ? -1 : 0}>
+                <div onClick={() => handleClick(skill.id)}> 
+                <span className='span' tabIndex={skill.name ? -1 : 0}>
                   {skill.id}. {skill.name  || 'Add Skill'}
                 </span>
+                </div>
               )}
               {showButtons[skill.id] &&  (
                 <button type="button" onClick={() => handleRemoveSkill(skill.id)}>
