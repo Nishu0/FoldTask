@@ -63,6 +63,7 @@ const AutoCompleteInput = ({ id, onChange }: AutoCompleteInputProps) => {
             placeholder="Type to search"
             noOptionsMessage={() => 'No tags found'} 
             isLoading={inputValue ? !options.length : undefined} 
+            menuIsOpen={true}
           />
         </div>
       );
