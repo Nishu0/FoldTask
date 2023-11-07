@@ -159,11 +159,9 @@ return (
                   onChange={(option) => handleChange(option, skill.id)} 
                 />
               ) : (
-                <div onClick={() => handleClick(skill.id)}> 
-                <span className='span' tabIndex={skill.name ? -1 : 0}>
+                <span className='span' onClick={() => handleClick(skill.id)} tabIndex={skill.name ? -1 : 0}>
                   {skill.id}. {skill.name  || 'Add Skill'}
                 </span>
-                </div>
               )}
               {showButtons[skill.id] &&  (
                 <button type="button" onClick={() => handleRemoveSkill(skill.id)}>
@@ -182,7 +180,7 @@ return (
           {skills.slice(5).map((skill, index) => (
               <li
                   key={skill.id}
-                  className={`skillsListItem ${skill.id === firstEmptySlot ? 'highlight' : ''}`}
+                  className={`skillsListItem ${skill.id === firstEmptySlot ? 'highlight' : ''} ${skill.name ? 'nonEmpty' : ''}`}
                   tabIndex={0}
                   onDragOver={(e)=>handleDragOver(e,skill.id)}
                   onDrop={(e) => handleDrop(e, index + 5)}

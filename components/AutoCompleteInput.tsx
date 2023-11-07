@@ -60,8 +60,8 @@ const AutoCompleteInput = ({ id, onChange }: AutoCompleteInputProps) => {
             options={options} 
             onInputChange={handleInputChange} 
             onChange={(option: Option | null) => option && onChange(option, id)} 
-            placeholder="Type to search"
-            noOptionsMessage={() => 'No tags found'} 
+            // placeholder="Type to search"
+            noOptionsMessage={() => 'Tap and Type to search'} 
             isLoading={inputValue ? !options.length : undefined} 
             menuIsOpen={true}
           />
